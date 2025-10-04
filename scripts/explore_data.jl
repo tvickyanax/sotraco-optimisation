@@ -8,7 +8,7 @@ lignes = CSV.read("data/lignes_bus.csv", DataFrame)
 arrets = CSV.read("data/arrets.csv", DataFrame)
 freq = CSV.read("data/frequentation.csv", DataFrame)
 
-println("📊 Aperçu des données :")
+println("Aperçu des données :")
 println("Lignes : ", size(lignes))
 println("Arrêts : ", size(arrets))
 println("Fréquentation : ", size(freq))
