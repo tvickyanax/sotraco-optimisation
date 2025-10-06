@@ -78,3 +78,64 @@ function tests_unitaires()
     
     println("🎉 TOUS LES TESTS PASSENT!")
 end
+
+# ==============================================================================
+# SYSTÈME DE RECOMMANDATIONS
+# ==============================================================================
+
+function generer_recommandations(stats_lignes, freq_par_heure)
+    println("📊 SYSTÈME DE RECOMMANDATIONS")
+    println("="^45)
+    
+    recommendations = []
+    
+    # Analyse de la fréquentation horaire
+    heure_max = freq_par_heure[1, :heure]
+    passagers_max = freq_par_heure[1, :total_montees]
+    push!(recommendations, "🕐 Renforcer les effectifs à $(heure_max)h ($passagers_max passagers)")
+    
+    # Analyse des lignes surchargées
+    lignes_surchargees = filter(row -> row.taux_occupation > 0.8, stats_lignes)
+    for ligne in eachrow(lignes_surchargees)
+        push!(recommendations, "🚍 Ajouter des bus sur la ligne $(ligne.nom_ligne) (occupation: $(round(ligne.taux_occupation*100, digits=1))%)")
+    end
+    
+    # Affichage des recommandations
+    for (i, rec) in enumerate(recommendations)
+        println("$i. $rec")
+    end
+    
+    return recommendations
+end
+
+# ==============================================================================
+# GÉNÉRATION DE RAPPORTS
+# ==============================================================================
+
+function generer_rapport_quotidien(lignes, frequentation, date_rapport=Dates.now())
+    println("📄 RAPPORT QUOTIDIEN - $(date_rapport)")
+    println("="^50)
+    
+    # Métriques principales
+    total_passagers = sum(frequentation.montees)
+    nb_lignes = length(unique(frequentation.ligne_id))
+    occupation_moyenne = mean(frequentation.occupation_bus) * 100
+    
+    println("📈 MÉTRIQUES CLÉS:")
+    println("   • Total passagers: $total_passagers")
+    println("   • Nombre de lignes: $nb_lignes")
+    println("   • Occupation moyenne: $(round(occupation_moyenne, digits=1))%")
+    
+    # Analyses détaillées
+    freq_par_heure = analyser_heures_pointe(frequentation)
+    stats_lignes = identifier_lignes_critiques(lignes, frequentation)
+    optimiser_frequences(stats_lignes)
+    recommandations = generer_recommandations(stats_lignes, freq_par_heure)
+    
+    return (
+        total_passagers=total_passagers,
+        nb_lignes=nb_lignes,
+        occupation_moyenne=occupation_moyenne,
+        recommandations=recommandations
+    )
+end
