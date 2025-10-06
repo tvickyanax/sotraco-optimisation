@@ -48,10 +48,10 @@ function optimiser_frequences(stats_lignes)
     for ligne in eachrow(stats_lignes)
         occupation = ligne.taux_occupation
         
-        if occupation > 40
+        if occupation > 0.4  # Correction : 0.4 au lieu de 40 (car c'est un ratio)
             action = "AUGMENTER"
             nouvelle_freq = "10-12 min"
-        elseif occupation < 25
+        elseif occupation < 0.25  # Correction : 0.25 au lieu de 25
             action = "RÉDUIRE" 
             nouvelle_freq = "20-25 min"
         else
@@ -59,7 +59,8 @@ function optimiser_frequences(stats_lignes)
             nouvelle_freq = "15 min"
         end
         
-        println("- $(ligne.nom_ligne): $(action) → $(nouvelle_freq) (occupation: $(round(occupation, digits=1))%)")
+        # CORRECTION : multiplication par 100 ajoutée
+        println("- $(ligne.nom_ligne): $(action) → $(nouvelle_freq) (occupation: $(round(occupation*100, digits=1))%)")
     end
 end
 
@@ -87,7 +88,8 @@ function generer_recommandations(stats_lignes, freq_par_heure)
     println("📊 SYSTÈME DE RECOMMANDATIONS")
     println("="^45)
     
-    recommendations = []
+    # CORRECTION : String[] au lieu de []
+    recommendations = String[]
     
     # Analyse de la fréquentation horaire
     heure_max = freq_par_heure[1, :heure]
