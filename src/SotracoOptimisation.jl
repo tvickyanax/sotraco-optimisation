@@ -1,9 +1,9 @@
-module Sotraco
+module SotracoOptimisation
 
 export Arret, Ligne, importer_arrets, importer_lignes, importer_frequentation, 
        explorer_donnees, calculer_distance, calculer_temps_trajet, analyser_performances,
        analyser_frequentation_horaire, analyser_arrets_frequentés, calculer_occupation_lignes,
-       identifier_lignes_problematiques
+       identifier_lignes_problematiques, tests_unitaires  # ← AJOUTÉ ICI
 
 using CSV, DataFrames, LinearAlgebra, Dates, Statistics
 
@@ -255,8 +255,7 @@ end
 # ==============================================================================
 
 export analyser_heures_pointe, identifier_lignes_critiques, optimiser_frequences,
-       generer_recommandations, generer_rapport_quotidien, tests_unitaires,
-       lancer_analyse_complete
+       generer_recommandations, generer_rapport_quotidien, lancer_analyse_complete
 
 """
 Analyser les heures de pointe détaillées
@@ -432,7 +431,5 @@ function tests_unitaires()
     
     println("🎉 TOUS LES TESTS PASSENT!")
 end
-
-
 
 end # module

@@ -1,6 +1,6 @@
 # TEST FINAL COMPLET - SYSTÈME SOTRACO
 include("src/Sotraco.jl")
-using .Sotraco, DataFrames, Dates
+using Sotraco, DataFrames, Dates
 
 println("="^60)
 println("🚍 TEST FINAL DU SYSTÈME SOTRACO OPTIMISATION")
