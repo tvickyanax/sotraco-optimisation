@@ -137,7 +137,13 @@ Ce projet est distribué sous licence **MIT** – voir le fichier `LICENSE` pour
 - Système d’analyse complet des données de transport  
 
 ### Points clés à retenir :
-- Votre package fonctionne avec `include("src/SotracoOptimisation.jl")`  
+- Le package fonctionne avec `include("src/SotracoOptimisation.jl")`  
 - Les tests unitaires passent avec succès  
 - Toutes les fonctions d’analyse sont disponibles  
 - Prêt pour les démonstrations en vidéo 🎥
+
+## 🎥 Démonstration Vidéo
+[![Vidéo démo]  (https://youtu.be/jGlZ0UQIjOc)
+
+## 📋 Description
+Système d'optimisation pour le réseau SOTRACO de Ouagadougou
